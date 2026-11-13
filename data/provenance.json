@@ -100,7 +100,7 @@
     "missing_or_nonpositive_selected_extents": 0,
     "unselected_characters": "11520 glyphs excluded solely because character != a, as prespecified."
   },
-  "dependence_analysis_unit": "60 paired writer means in screen millimetres; each writer contributes one pair based on both repetitions.",
+  "dependence_analysis_unit": "60 means of the retained observations per writer; 55 writers retain two repetitions and five retain one. Permutation and bootstrap blocks are (site, retained repetition count).",
   "site_caveat": "UJI and UPV use different coordinate scales (100 and 152 ink units/mm). Pooling unconverted ink extents would introduce a site scale confound. Screen-mm conversion corrects this documented scale, but site and population differences remain for sensitivity analysis.",
   "limitations": [
     "Characters were written in guided acquisition boxes on a tablet, not free writing on paper.",
@@ -113,17 +113,58 @@
       "sha256": "b1ff0a5c20fbbf1de057132701ade25fcd8908e8ffebd5832d3bc47342fdadfe",
       "bytes": 13693
     },
-    "writer_means.csv": {
-      "sha256": "da6a3ace33d1c500ac7e74e29bede1eb7ce7de33d95883505de9a168f2ea4169",
-      "bytes": 4291
-    },
     "samples.json": {
       "sha256": "9bf317f6f100895ea6899969ffe46aa5c52387e2a7bb91443933e50b9e507bda",
       "bytes": 546106
+    },
+    "cleaned_glyphs.csv": {
+      "bytes": 13079,
+      "sha256": "17f9aff0b48130bec8565e936085f7d53368095417a2e670a9d696c34b171011",
+      "rows": 115
     }
   },
   "official_api_metadata": {
     "url": "https://archive.ics.uci.edu/api/dataset?id=177",
     "sha256": "ce66cfa1a6b6b9012d6d5b74e7e0be8ef4bff3af433ca8d1e19a7f1d9672b690"
+  },
+  "analysis_filter": {
+    "scope": "Applied in the notebook; glyphs.csv remains the unfiltered 120-record input",
+    "method": "One paired Tukey filter, Q1-1.5*IQR through Q3+1.5*IQR for both dimensions, inclusive; quartiles computed once on all original records",
+    "bounds": {
+      "height_mm": {
+        "q1": 3.794407894736842,
+        "q3": 5.317434210526316,
+        "iqr": 1.523026315789474,
+        "lower": 1.5098684210526314,
+        "upper": 7.6019736842105265,
+        "outside": 3
+      },
+      "width_mm": {
+        "q1": 4.154605263157895,
+        "q3": 5.860197368421053,
+        "iqr": 1.7055921052631584,
+        "lower": 1.596217105263157,
+        "upper": 8.418585526315791,
+        "outside": 2
+      }
+    },
+    "raw_n": 120,
+    "removed_n": 5,
+    "remaining_n": 115,
+    "removed_sample_ids": [
+      "trn_UPV_W22-01-U+0061",
+      "trn_UPV_W26-01-U+0061",
+      "trn_UPV_W28-02-U+0061",
+      "trn_UPV_W47-01-U+0061",
+      "tst_UPV_W54-01-U+0061"
+    ],
+    "writer_n": 60,
+    "writer_blocks": {
+      "UPV:2": 39,
+      "UJI:2": 16,
+      "UPV:1": 5
+    },
+    "writer_means_storage": "Calculated from retained records inside handwriting.ipynb; no stored writer_means.csv",
+    "cleaned_data_file": "cleaned_glyphs.csv"
   }
 }
